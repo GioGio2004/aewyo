@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ---------- aewyo landing ---------- */
+
+.landing {
+  --aw-paper: #faf9f6;
+  --aw-ink: #1c1917;
+  --aw-muted: #78716c;
+  --aw-line: #e7e3dc;
+  --aw-walnut: #5e4634;
+  --aw-walnut-hover: #4c3829;
+  font-family: var(--font-aw-sans), var(--font-geist-sans), sans-serif;
+}
+
+/* language visibility — server renders both, html[data-lang] picks one */
+html[data-lang="ka"] .l-en {
+  display: none;
+}
+html[data-lang="en"] .l-ka {
+  display: none;
+}
+
+/* toggle active state, driven by the same attribute (all instances sync) */
+.lt {
+  color: var(--aw-muted);
+  transition: color 0.15s ease;
+}
+html[data-lang="ka"] [data-lt="ka"],
+html[data-lang="en"] [data-lt="en"] {
+  color: var(--aw-ink);
+}
+
+.landing :is(a, button):focus-visible {
+  outline: 2px solid var(--aw-walnut);
+  outline-offset: 2px;
+}
+
+/* blueprint draw-in + hero reveal */
+@keyframes aw-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes aw-fade {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes aw-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.bp .s,
+.bp .d {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: aw-draw 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.bp .t {
+  opacity: 0;
+  animation: aw-fade 0.5s ease-out forwards;
+}
+.aw-rise {
+  opacity: 0;
+  animation: aw-rise 0.6s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp .s,
+  .bp .d {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+  .bp .t {
+    animation: none;
+    opacity: 1;
+  }
+  .aw-rise {
+    animation: none;
+    opacity: 1;
+  }
+}
