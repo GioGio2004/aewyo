@@ -15,7 +15,8 @@ type PartGroup =
   | "drawerFront"
   | "drawerSide"
   | "drawerRail"
-  | "drawerBottom";
+  | "drawerBottom"
+  | "blindPanel";
 
 const GROUP_ORDER: PartGroup[] = [
   "side",
@@ -25,6 +26,7 @@ const GROUP_ORDER: PartGroup[] = [
   "back",
   "plinth",
   "door",
+  "blindPanel",
   "drawerFront",
   "drawerSide",
   "drawerRail",
@@ -44,6 +46,7 @@ const ROLE_TO_GROUP: Record<PanelRole, PartGroup> = {
   "drawer-side": "drawerSide",
   "drawer-rail": "drawerRail",
   "drawer-bottom": "drawerBottom",
+  "blind-panel": "blindPanel",
 };
 
 const GROUP_NAMES: Record<PartGroup, LocalizedString> = copy.studio.parts;

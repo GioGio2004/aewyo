@@ -30,6 +30,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var l=localStorage.getItem("aewyo-lang");if(l==="en"||l==="ka"){document.documentElement.dataset.lang=l;document.documentElement.lang=l;}}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <ClerkProvider
           signInFallbackRedirectUrl="/app"

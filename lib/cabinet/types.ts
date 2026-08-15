@@ -54,12 +54,14 @@ export type PanelRole =
   | "drawer-front"
   | "drawer-side"
   | "drawer-rail"
-  | "drawer-bottom";
+  | "drawer-bottom"
+  /** fixed front panel covering the dead part of a blind corner cabinet */
+  | "blind-panel";
 
 export type Panel = {
   id: string;
   role: PanelRole;
-  /** Full box dimensions in cabinet space */
+  /** Full box dimensions in cabinet space (bounding box when `polygon` is set) */
   size: { x: number; y: number; z: number };
   /** Box centre in cabinet space */
   position: { x: number; y: number; z: number };
@@ -67,6 +69,18 @@ export type Panel = {
   cut: { length: number; width: number; thickness: number };
   /** Decor id (see decors.ts) */
   decor: string;
+  /**
+   * Rotation around the panel's own vertical axis (radians, three.js Y).
+   * Used for the diagonal door of a corner cabinet. Absent = axis-aligned.
+   */
+  rotY?: number;
+  /**
+   * Plan-view outline (cabinet-local x,z) for non-rectangular horizontal
+   * panels such as a corner cabinet's pentagon bottom. When present the 3D
+   * view extrudes it by size.y around position.y instead of drawing a box;
+   * `size`/`position` still give the bounding box.
+   */
+  polygon?: Array<[number, number]>;
 };
 
 export type HardwareItem = {

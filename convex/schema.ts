@@ -31,6 +31,14 @@ export const cabinetParamsValidator = v.object({
 export const wallValidator = v.object({
   id: v.string(),
   length: v.number(),
+  // turn toward the next wall; missing = "right" (legacy)
+  turn: v.optional(v.union(v.literal("left"), v.literal("right"))),
+});
+
+export const cornerParamsValidator = v.object({
+  legA: v.number(),
+  legB: v.number(),
+  style: v.union(v.literal("diagonal"), v.literal("blind")),
 });
 
 export const placementValidator = v.object({
@@ -38,8 +46,12 @@ export const placementValidator = v.object({
   label: v.string(),
   wallId: v.string(),
   band: v.union(v.literal("base"), v.literal("wall"), v.literal("tall")),
-  kind: v.optional(v.union(v.literal("cabinet"), v.literal("spacer"))),
+  kind: v.optional(
+    v.union(v.literal("cabinet"), v.literal("spacer"), v.literal("corner")),
+  ),
   params: cabinetParamsValidator,
+  // present for kind "corner"
+  corner: v.optional(cornerParamsValidator),
 });
 
 export default defineSchema({
@@ -55,6 +67,8 @@ export default defineSchema({
     // Clerk user ID (identity.subject) — independent of the users sync
     ownerExternalId: v.string(),
     name: v.string(),
+    // last explicit save (ms since epoch); optional for legacy docs
+    updatedAt: v.optional(v.number()),
     walls: v.array(wallValidator),
     // optional for docs saved before these settings existed
     wallHeight: v.optional(v.number()),

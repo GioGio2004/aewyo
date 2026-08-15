@@ -30,11 +30,6 @@ export default async function AppPage() {
     <div
       className={`${serif.variable} ${sans.variable} landing flex flex-1 flex-col bg-[var(--aw-paper)] text-[var(--aw-ink)] antialiased`}
     >
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `try{var l=localStorage.getItem("aewyo-lang");if(l==="en"||l==="ka"){document.documentElement.dataset.lang=l;document.documentElement.lang=l;}}catch(e){}`,
-        }}
-      />
       <header className="border-b border-[var(--aw-line)]">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
           <div className="flex items-baseline gap-3">

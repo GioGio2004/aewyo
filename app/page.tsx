@@ -27,13 +27,6 @@ export default function Home() {
     <div
       className={`${serif.variable} ${sans.variable} landing flex-1 bg-[var(--aw-paper)] text-[var(--aw-ink)] antialiased`}
     >
-      {/* restore persisted language before the header paints (no flash) */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `try{var l=localStorage.getItem("aewyo-lang");if(l==="en"||l==="ka"){document.documentElement.dataset.lang=l;document.documentElement.lang=l;}}catch(e){}`,
-        }}
-      />
-
       {/* Header */}
       <header className="border-b border-[var(--aw-line)]">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">

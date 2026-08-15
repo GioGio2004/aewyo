@@ -14,14 +14,17 @@ export default function WallElevations({
   layout,
   selectedId,
   onSelect,
+  singleColumn = false,
 }: {
   project: KitchenProject;
   layout: KitchenLayout;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
+  /** Force one wall per row (print layout) */
+  singleColumn?: boolean;
 }) {
   return (
-    <div className="grid gap-8 xl:grid-cols-2">
+    <div className={singleColumn ? "grid gap-10" : "grid gap-8 xl:grid-cols-2"}>
       {project.walls.map((wall) => {
         const ROOM_H = project.wallHeight;
         const cabinets = layout.cabinets.filter(

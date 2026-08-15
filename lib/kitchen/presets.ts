@@ -190,3 +190,44 @@ export const CORNER_CLEARANCE = 20;
 
 /** Gap between the wall face and cabinet backs (services + no z-fighting) */
 export const WALL_STANDOFF = 20;
+
+/** Corner cabinet defaults per band (legs measured from the corner point) */
+export const CORNER_BASE_DEFAULTS = {
+  legA: 900,
+  legB: 900,
+  style: "diagonal" as const,
+};
+export const CORNER_WALL_DEFAULTS = {
+  legA: 600,
+  legB: 600,
+  style: "diagonal" as const,
+};
+
+/** CabinetParams used for corner placements (width is informational = legA) */
+export const CORNER_PARAMS: Record<"base" | "wall", CabinetParams> = {
+  base: {
+    ...common,
+    width: 900,
+    height: 870,
+    depth: 560,
+    shelfCount: 1,
+    plinthHeight: 100,
+    front: "doors",
+    doorCount: 1,
+    frontDecor: "stone-grey",
+  },
+  wall: {
+    ...common,
+    width: 600,
+    height: 720,
+    depth: 320,
+    shelfCount: 2,
+    plinthHeight: 0,
+    front: "doors",
+    doorCount: 1,
+    frontDecor: "walnut",
+  },
+};
+
+/** Workshop label prefix for corner placements */
+export const CORNER_LABEL_PREFIX = "C";
